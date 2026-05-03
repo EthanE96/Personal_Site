@@ -1,0 +1,29 @@
+.shell {
+  display: flex;
+  min-height: 100dvh;
+}
+
+app-sidebar {
+  width: 280px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 0;
+  height: 100dvh;
+}
+
+.content {
+  flex: 1;
+  overflow-y: auto;
+}
+
+@media (max-width: 768px) {
+  .shell {
+    flex-direction: column;
+  }
+
+  app-sidebar {
+    width: 100%;
+    position: relative;
+    height: auto;
+  }
+}

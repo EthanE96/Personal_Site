@@ -1,0 +1,183 @@
+.resume {
+  padding: 2rem;
+  max-width: 800px;
+}
+
+/* Header */
+.resume-header {
+  text-align: center;
+  padding-bottom: 1.25rem;
+  border-bottom: 2px solid var(--color-border);
+  margin-bottom: 1.5rem;
+}
+
+.resume-name {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin: 0;
+  color: var(--color-text-primary);
+}
+
+.resume-contact {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.25rem 0;
+  margin-top: 0.5rem;
+  font-size: 0.8125rem;
+  color: var(--color-text-secondary);
+}
+
+.resume-contact a {
+  color: var(--color-text-link);
+}
+
+.separator {
+  margin: 0 0.5rem;
+  color: var(--color-text-secondary);
+}
+
+/* Sections */
+.section {
+  margin-bottom: 1.5rem;
+}
+
+.section-title {
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-text-primary);
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 0.375rem;
+  margin: 0 0 0.75rem;
+}
+
+.section-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Education */
+.education-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--color-text-primary);
+}
+
+.education-detail {
+  font-size: 0.8125rem;
+  color: var(--color-text-secondary);
+  margin-top: -0.5rem;
+}
+
+.meta {
+  font-size: 0.8125rem;
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+}
+
+/* Roles */
+.role {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.role-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.role-title {
+  font-size: 0.875rem;
+  color: var(--color-text-primary);
+}
+
+.role-date {
+  font-size: 0.8125rem;
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+}
+
+.role-summary {
+  font-size: 0.8125rem;
+  font-style: italic;
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+.role-bullets {
+  margin: 0.25rem 0 0;
+  padding-left: 1.25rem;
+  font-size: 0.8125rem;
+  color: var(--color-text-primary);
+  line-height: 1.6;
+}
+
+.role-bullets li {
+  margin-bottom: 0.25rem;
+}
+
+/* Technical */
+.tech-row {
+  font-size: 0.8125rem;
+  color: var(--color-text-primary);
+  line-height: 1.5;
+}
+
+/* Honors */
+.honors-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.375rem 2rem;
+  font-size: 0.8125rem;
+  color: var(--color-text-primary);
+}
+
+/* Print styles */
+@media print {
+  .resume {
+    padding: 0;
+    max-width: 100%;
+    color: #000;
+  }
+
+  .resume-name {
+    color: #000;
+  }
+
+  .section-title {
+    color: #000;
+    border-bottom-color: #000;
+  }
+
+  .resume-contact a,
+  .role-title,
+  .role-bullets,
+  .tech-row,
+  .education-row,
+  .honors-grid span {
+    color: #000;
+  }
+
+  .resume-contact .separator,
+  .meta,
+  .role-date,
+  .role-summary,
+  .education-detail {
+    color: #444;
+  }
+
+  .resume-header {
+    border-bottom-color: #000;
+  }
+}

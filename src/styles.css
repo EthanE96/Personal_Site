@@ -1,3 +1,72 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import 'tailwindcss';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-bg-primary: #ffffff;
+  --color-bg-secondary: #f6f8fa;
+  --color-bg-card: #ffffff;
+  --color-bg-card-hover: #f6f8fa;
+  --color-border: #d1d9e0;
+  --color-text-primary: #1f2328;
+  --color-text-secondary: #656d76;
+  --color-text-link: #0969da;
+  --color-accent: #0969da;
+  --color-accent-hover: #0550ae;
+  --color-tag-bg: #ddf4ff;
+  --color-tag-text: #0969da;
+  --color-success: #1a7f37;
+  --color-input-bg: #ffffff;
+  --color-input-border: #d1d9e0;
+}
+
+/* Dark theme overrides */
+.dark {
+  --color-bg-primary: #0d1117;
+  --color-bg-secondary: #161b22;
+  --color-bg-card: #161b22;
+  --color-bg-card-hover: #1c2129;
+  --color-border: #30363d;
+  --color-text-primary: #e6edf3;
+  --color-text-secondary: #8b949e;
+  --color-text-link: #58a6ff;
+  --color-accent: #58a6ff;
+  --color-accent-hover: #79c0ff;
+  --color-tag-bg: #1f3347;
+  --color-tag-text: #58a6ff;
+  --color-success: #3fb950;
+  --color-input-bg: #0d1117;
+  --color-input-border: #30363d;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji';
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+  margin: 0;
+}
+
+a {
+  color: var(--color-text-link);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+*:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
