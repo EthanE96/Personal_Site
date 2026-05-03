@@ -5,7 +5,7 @@ import { Project } from '../../../models/project.model';
   selector: 'app-project-card',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <article class="card hard-shadow-hover">
+    <article class="card">
       <div class="card-body">
         <h3 class="card-title">{{ project().title }}</h3>
         <p class="card-desc">{{ project().description }}</p>
@@ -69,15 +69,20 @@ import { Project } from '../../../models/project.model';
   `,
   styles: `
     .card {
-      border-right: 1px solid #111111;
-      border-bottom: 1px solid #111111;
+      border: 1px solid #111111;
       background-color: #f9f9f7;
       display: flex;
       flex-direction: column;
+      min-height: 280px;
+      transition: box-shadow 0.2s ease-out;
+    }
+
+    .card:hover {
+      box-shadow: 5px 5px 0px 0px #111111;
     }
 
     .card-body {
-      padding: 1.25rem 1.25rem 0.75rem;
+      padding: 1.75rem 1.5rem 1rem;
       flex: 1;
       display: flex;
       flex-direction: column;

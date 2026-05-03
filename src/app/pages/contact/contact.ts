@@ -117,7 +117,8 @@ import { signal, inject } from '@angular/core';
   styles: `
     .contact {
       padding: 2rem 2.5rem 3rem;
-      max-width: 640px;
+      width: 100%;
+      box-sizing: border-box;
     }
 
     /* Editorial header */

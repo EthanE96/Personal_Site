@@ -1,13 +1,55 @@
 /* ─── Resume – Newsprint Style ───────────────────────────── */
 .resume {
   padding: 2rem 2.5rem 3rem;
-  max-width: 800px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Editorial page header (matches landing / contact style) */
+.page-header {
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 4px solid #111111;
+}
+
+.section-kicker {
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: #cc0000;
+  margin: 0 0 0.5rem;
+}
+
+.page-headline {
+  font-family: 'Playfair Display', 'Times New Roman', serif;
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 900;
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+  color: #111111;
+  margin: 0 0 1rem;
+}
+
+.header-rule {
+  width: 3rem;
+  height: 3px;
+  background-color: #111111;
+  margin-bottom: 0.75rem;
+}
+
+.page-deck {
+  font-family: 'Lora', Georgia, serif;
+  font-size: 0.9375rem;
+  font-style: italic;
+  color: #525252;
+  margin: 0;
 }
 
 /* Header */
 .resume-header {
   padding-bottom: 1.25rem;
-  border-bottom: 4px solid #111111;
+  border-bottom: 2px solid #111111;
   margin-bottom: 2rem;
 }
 

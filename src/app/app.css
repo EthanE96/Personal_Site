@@ -4,7 +4,7 @@
 }
 
 app-sidebar {
-  width: 280px;
+  width: 420px;
   flex-shrink: 0;
   position: sticky;
   top: 0;
@@ -14,6 +14,7 @@ app-sidebar {
 
 .content {
   flex: 1;
+  min-width: 0;
   overflow-y: auto;
   background-color: #f9f9f7;
 }

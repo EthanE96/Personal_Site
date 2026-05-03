@@ -1,21 +1,30 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { DatePipe } from '@angular/common';
-import { ThemeService } from './../../shared/services/theme.service';
+import { NgOptimizedImage } from '@angular/common';
 
 @Component({
   selector: 'app-sidebar',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [RouterLink, RouterLinkActive, DatePipe],
+  imports: [RouterLink, RouterLinkActive, NgOptimizedImage],
   template: `
     <aside class="sidebar">
       <!-- Masthead -->
       <header class="masthead">
         <p class="edition-label">Portfolio</p>
-        <h1 class="masthead-name">Ethan A.<br />Edwards</h1>
-        <p class="masthead-title">
-          SAP AI Solutions Engineer<br /><span class="masthead-org">@ Ernst &amp; Young</span>
-        </p>
+
+        <div class="avatar-frame">
+          <img
+            ngSrc="profile-picture.jpg"
+            alt="Ethan Edwards"
+            width="400"
+            height="400"
+            class="avatar"
+            priority
+          />
+        </div>
+
+        <h1 class="masthead-name">Ethan<br />Edwards</h1>
+        <p class="masthead-title">AI Solutions Architect</p>
       </header>
 
       <div class="divider-heavy" role="separator"></div>
@@ -23,10 +32,6 @@ import { ThemeService } from './../../shared/services/theme.service';
       <!-- Edition metadata -->
       <div class="edition-meta">
         <span class="mono-label">Denver, CO</span>
-        <span class="mono-label mono-sep" aria-hidden="true">|</span>
-        <time class="mono-label" [attr.datetime]="today | date: 'yyyy-MM-dd'">{{
-          today | date: 'MMM d, y'
-        }}</time>
       </div>
 
       <div class="divider" role="separator"></div>
@@ -96,17 +101,6 @@ import { ThemeService } from './../../shared/services/theme.service';
 
       <div class="divider" role="separator"></div>
 
-      <!-- Interests -->
-      <section class="interests" aria-label="Interests">
-        <h2 class="section-label">Interests</h2>
-        <div class="tag-list">
-          <span class="tag">Advanced Skier</span>
-          <span class="tag">Land Cruiser Mechanic</span>
-        </div>
-      </section>
-
-      <div class="divider" role="separator"></div>
-
       <!-- Navigation -->
       <nav class="nav" aria-label="Main navigation">
         <a
@@ -173,18 +167,43 @@ import { ThemeService } from './../../shared/services/theme.service';
       flex-direction: column;
       height: 100%;
       background-color: #f9f9f7;
-      overflow-y: auto;
+      overflow: hidden;
     }
 
     /* Masthead */
     .masthead {
-      padding: 1.5rem 1.25rem 1rem;
+      padding: 1.25rem 1.5rem 1rem;
       border-bottom: 4px solid #111111;
+    }
+
+    /* Profile photo */
+    .avatar-frame {
+      width: 110px;
+      height: 125px;
+      margin: 0 0 1rem;
+      border: 2px solid #111111;
+      overflow: hidden;
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .avatar {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 12%;
+      filter: grayscale(100%);
+      transition: filter 0.3s ease-out;
+    }
+
+    .avatar:hover {
+      filter: grayscale(0%) sepia(20%);
     }
 
     .edition-label {
       font-family: 'JetBrains Mono', 'Courier New', monospace;
-      font-size: 0.625rem;
+      font-size: 0.65rem;
       text-transform: uppercase;
       letter-spacing: 0.2em;
       color: #cc0000;
@@ -193,30 +212,21 @@ import { ThemeService } from './../../shared/services/theme.service';
 
     .masthead-name {
       font-family: 'Playfair Display', 'Times New Roman', serif;
-      font-size: 1.75rem;
+      font-size: 2.5rem;
       font-weight: 900;
       line-height: 1;
       letter-spacing: -0.02em;
       color: #111111;
-      margin: 0 0 0.5rem;
+      margin: 0 0 0.375rem;
     }
 
     .masthead-title {
       font-family: 'Lora', Georgia, serif;
-      font-size: 0.75rem;
+      font-size: 0.8125rem;
       font-style: italic;
       color: #525252;
       margin: 0;
       line-height: 1.4;
-    }
-
-    .masthead-org {
-      font-style: normal;
-      font-family: 'Inter', 'Helvetica Neue', sans-serif;
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: #737373;
     }
 
     /* Dividers */
@@ -237,12 +247,12 @@ import { ThemeService } from './../../shared/services/theme.service';
       display: flex;
       align-items: center;
       gap: 0.375rem;
-      padding: 0.5rem 1.25rem;
+      padding: 0.375rem 1.5rem;
     }
 
     .mono-label {
       font-family: 'JetBrains Mono', 'Courier New', monospace;
-      font-size: 0.6rem;
+      font-size: 0.65rem;
       text-transform: uppercase;
       letter-spacing: 0.1em;
       color: #737373;
@@ -256,8 +266,8 @@ import { ThemeService } from './../../shared/services/theme.service';
     .info {
       display: flex;
       flex-direction: column;
-      gap: 0.5rem;
-      padding: 0.75rem 1.25rem;
+      gap: 0.375rem;
+      padding: 0.625rem 1.5rem;
     }
 
     .info-item {
@@ -266,7 +276,7 @@ import { ThemeService } from './../../shared/services/theme.service';
       gap: 0.5rem;
       color: #525252;
       font-family: 'Inter', 'Helvetica Neue', sans-serif;
-      font-size: 0.75rem;
+      font-size: 0.8125rem;
     }
 
     .info-link {
@@ -283,38 +293,6 @@ import { ThemeService } from './../../shared/services/theme.service';
       text-decoration-color: #cc0000;
     }
 
-    /* Interests */
-    .interests {
-      padding: 0.75rem 1.25rem;
-    }
-
-    .section-label {
-      font-family: 'Inter', 'Helvetica Neue', sans-serif;
-      font-size: 0.6rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.15em;
-      color: #737373;
-      margin: 0 0 0.5rem;
-    }
-
-    .tag-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.375rem;
-    }
-
-    .tag {
-      font-family: 'JetBrains Mono', 'Courier New', monospace;
-      font-size: 0.6rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      padding: 0.25rem 0.5rem;
-      border: 1px solid #111111;
-      color: #111111;
-      background: transparent;
-    }
-
     /* Navigation */
     .nav {
       display: flex;
@@ -325,10 +303,10 @@ import { ThemeService } from './../../shared/services/theme.service';
     .nav-link {
       display: flex;
       align-items: center;
-      gap: 0.625rem;
-      padding: 0.625rem 1.25rem;
+      gap: 0.75rem;
+      padding: 0.625rem 1.5rem;
       font-family: 'Inter', 'Helvetica Neue', sans-serif;
-      font-size: 0.75rem;
+      font-size: 0.875rem;
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.1em;
@@ -357,7 +335,7 @@ import { ThemeService } from './../../shared/services/theme.service';
     .sidebar-footer {
       margin-top: auto;
       border-top: 1px solid #111111;
-      padding: 0.75rem 1.25rem;
+      padding: 0.625rem 1.5rem;
     }
 
     @media (max-width: 768px) {
@@ -383,7 +361,4 @@ import { ThemeService } from './../../shared/services/theme.service';
     }
   `,
 })
-export class SidebarComponent {
-  protected readonly themeService = inject(ThemeService);
-  protected readonly today = new Date();
-}
+export class SidebarComponent {}

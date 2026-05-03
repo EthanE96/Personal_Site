@@ -4,7 +4,7 @@ export const routes: Routes = [
   {
     path: '',
     loadComponent: () => import('./pages/landing/landing').then((m) => m.LandingComponent),
-    title: 'Ethan Edwards — Projects',
+    title: 'Ethan Edwards',
   },
   {
     path: 'resume',
