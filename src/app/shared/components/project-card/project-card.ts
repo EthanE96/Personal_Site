@@ -5,11 +5,13 @@ import { Project } from '../../../models/project.model';
   selector: 'app-project-card',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <article class="card">
-      <h3 class="card-title">{{ project().title }}</h3>
-      <p class="card-desc">{{ project().description }}</p>
+    <article class="card hard-shadow-hover">
+      <div class="card-body">
+        <h3 class="card-title">{{ project().title }}</h3>
+        <p class="card-desc">{{ project().description }}</p>
+      </div>
       @if (project().tags?.length) {
-        <div class="card-tags">
+        <div class="card-tags" aria-label="Technologies used">
           @for (tag of project().tags; track tag) {
             <span class="tag">{{ tag }}</span>
           }
@@ -21,13 +23,13 @@ import { Project } from '../../../models/project.model';
             [href]="project().appUrl"
             target="_blank"
             rel="noopener noreferrer"
-            class="link-btn primary"
+            class="link-btn link-btn--primary"
             aria-label="Open live application for {{ project().title }}"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
+              width="12"
+              height="12"
               viewBox="0 0 16 16"
               fill="currentColor"
               aria-hidden="true"
@@ -49,8 +51,8 @@ import { Project } from '../../../models/project.model';
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
+              width="12"
+              height="12"
               viewBox="0 0 16 16"
               fill="currentColor"
               aria-hidden="true"
@@ -67,90 +69,104 @@ import { Project } from '../../../models/project.model';
   `,
   styles: `
     .card {
-      border: 1px solid var(--color-border);
-      border-radius: 0.375rem;
-      padding: 1.25rem;
-      background-color: var(--color-bg-card);
+      border-right: 1px solid #111111;
+      border-bottom: 1px solid #111111;
+      background-color: #f9f9f7;
       display: flex;
       flex-direction: column;
-      gap: 0.75rem;
-      transition:
-        border-color 0.15s ease,
-        background-color 0.15s ease;
     }
 
-    .card:hover {
-      border-color: var(--color-text-secondary);
-      background-color: var(--color-bg-card-hover);
+    .card-body {
+      padding: 1.25rem 1.25rem 0.75rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
     }
 
     .card-title {
-      font-size: 1rem;
-      font-weight: 600;
-      color: var(--color-text-link);
+      font-family: 'Playfair Display', 'Times New Roman', serif;
+      font-size: 1.125rem;
+      font-weight: 700;
+      color: #111111;
       margin: 0;
+      line-height: 1.2;
     }
 
     .card-desc {
-      font-size: 0.875rem;
-      color: var(--color-text-secondary);
+      font-family: 'Lora', Georgia, serif;
+      font-size: 0.8125rem;
+      color: #525252;
       margin: 0;
-      line-height: 1.5;
+      line-height: 1.625;
       flex: 1;
     }
 
     .card-tags {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.375rem;
+      gap: 0.25rem;
+      padding: 0 1.25rem 0.75rem;
+      border-top: 1px solid #e5e5e0;
+      padding-top: 0.75rem;
     }
 
     .tag {
-      font-size: 0.75rem;
-      padding: 0.125rem 0.5rem;
-      border-radius: 9999px;
-      background-color: var(--color-tag-bg);
-      color: var(--color-tag-text);
+      font-family: 'JetBrains Mono', 'Courier New', monospace;
+      font-size: 0.6rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 0.2rem 0.4rem;
+      border: 1px solid #a3a3a3;
+      color: #525252;
+      background: transparent;
     }
 
     .card-links {
       display: flex;
-      gap: 0.5rem;
-      padding-top: 0.25rem;
-      border-top: 1px solid var(--color-border);
+      gap: 0;
+      border-top: 1px solid #111111;
     }
 
     .link-btn {
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: 0.375rem;
-      padding: 0.375rem 0.75rem;
-      border: 1px solid var(--color-border);
-      border-radius: 0.375rem;
-      font-size: 0.75rem;
-      font-weight: 500;
-      color: var(--color-text-secondary);
+      padding: 0.5rem 0.875rem;
+      font-family: 'Inter', 'Helvetica Neue', sans-serif;
+      font-size: 0.6875rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #111111;
       text-decoration: none;
+      border-right: 1px solid #111111;
+      background: transparent;
+      min-height: 44px;
       transition:
-        background-color 0.15s ease,
-        border-color 0.15s ease;
+        background-color 0.2s ease-out,
+        color 0.2s ease-out;
+    }
+
+    .link-btn:last-child {
+      border-right: none;
     }
 
     .link-btn:hover {
-      background-color: var(--color-bg-card-hover);
-      border-color: var(--color-text-secondary);
+      background-color: #111111;
+      color: #f9f9f7;
       text-decoration: none;
     }
 
-    .link-btn.primary {
-      background-color: var(--color-accent);
-      border-color: var(--color-accent);
-      color: #ffffff;
+    .link-btn--primary {
+      background-color: #111111;
+      color: #f9f9f7;
     }
 
-    .link-btn.primary:hover {
-      background-color: var(--color-accent-hover);
-      border-color: var(--color-accent-hover);
+    .link-btn--primary:hover {
+      background-color: #f9f9f7;
+      color: #111111;
     }
   `,
 })

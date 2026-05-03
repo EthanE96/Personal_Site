@@ -7,18 +7,21 @@ import { signal, inject } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [ReactiveFormsModule],
   template: `
-    <div class="contact">
-      <div class="header">
-        <h2 class="heading">Contact Me</h2>
-        <p class="subheading">Have a question or want to work together? Send me a message.</p>
-      </div>
+    <div class="contact newsprint-texture">
+      <!-- Editorial header -->
+      <header class="page-header">
+        <p class="section-kicker">— Get In Touch</p>
+        <h2 class="page-headline">Contact</h2>
+        <div class="header-rule" role="separator"></div>
+        <p class="page-deck">Have a question or want to work together? Send me a message.</p>
+      </header>
 
       @if (submitted()) {
-        <div class="success" role="status">
+        <div class="success" role="status" aria-live="polite">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
+            width="20"
+            height="20"
             viewBox="0 0 16 16"
             fill="currentColor"
             aria-hidden="true"
@@ -28,7 +31,7 @@ import { signal, inject } from '@angular/core';
             />
           </svg>
           <div>
-            <p class="success-title">Message sent!</p>
+            <p class="success-title">Message transmitted.</p>
             <p class="success-desc">Thanks for reaching out. I'll get back to you soon.</p>
           </div>
         </div>
@@ -36,13 +39,16 @@ import { signal, inject } from '@angular/core';
 
       <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form" novalidate>
         <div class="field">
-          <label for="name" class="label">Name <span class="required">*</span></label>
+          <label for="name" class="label"
+            >Name <span class="required" aria-hidden="true">*</span></label
+          >
           <input
             id="name"
             formControlName="name"
             type="text"
             class="input"
             placeholder="Your name"
+            autocomplete="name"
           />
           @if (form.controls.name.touched && form.controls.name.errors) {
             <p class="error" role="alert">Name is required.</p>
@@ -50,13 +56,16 @@ import { signal, inject } from '@angular/core';
         </div>
 
         <div class="field">
-          <label for="email" class="label">Email <span class="required">*</span></label>
+          <label for="email" class="label"
+            >Email <span class="required" aria-hidden="true">*</span></label
+          >
           <input
             id="email"
             formControlName="email"
             type="email"
             class="input"
             placeholder="you@example.com"
+            autocomplete="email"
           />
           @if (form.controls.email.touched && form.controls.email.errors) {
             <p class="error" role="alert">
@@ -70,7 +79,9 @@ import { signal, inject } from '@angular/core';
         </div>
 
         <div class="field">
-          <label for="subject" class="label">Subject <span class="required">*</span></label>
+          <label for="subject" class="label"
+            >Subject <span class="required" aria-hidden="true">*</span></label
+          >
           <input
             id="subject"
             formControlName="subject"
@@ -84,7 +95,9 @@ import { signal, inject } from '@angular/core';
         </div>
 
         <div class="field">
-          <label for="message" class="label">Message <span class="required">*</span></label>
+          <label for="message" class="label"
+            >Message <span class="required" aria-hidden="true">*</span></label
+          >
           <textarea
             id="message"
             formControlName="message"
@@ -97,60 +110,89 @@ import { signal, inject } from '@angular/core';
           }
         </div>
 
-        <button type="submit" class="submit-btn" [disabled]="submitted()">Send Message</button>
+        <button type="submit" class="submit-btn" [disabled]="submitted()">Transmit Message</button>
       </form>
     </div>
   `,
   styles: `
     .contact {
-      padding: 2rem;
+      padding: 2rem 2.5rem 3rem;
       max-width: 640px;
     }
 
-    .header {
-      margin-bottom: 1.5rem;
+    /* Editorial header */
+    .page-header {
+      margin-bottom: 2.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 4px solid #111111;
     }
 
-    .heading {
-      font-size: 1.5rem;
-      font-weight: 600;
+    .section-kicker {
+      font-family: 'JetBrains Mono', 'Courier New', monospace;
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: #cc0000;
+      margin: 0 0 0.5rem;
+    }
+
+    .page-headline {
+      font-family: 'Playfair Display', 'Times New Roman', serif;
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 900;
+      line-height: 0.9;
+      letter-spacing: -0.03em;
+      color: #111111;
+      margin: 0 0 1rem;
+    }
+
+    .header-rule {
+      width: 3rem;
+      height: 3px;
+      background-color: #111111;
+      margin-bottom: 0.75rem;
+    }
+
+    .page-deck {
+      font-family: 'Lora', Georgia, serif;
+      font-size: 0.9375rem;
+      font-style: italic;
+      color: #525252;
       margin: 0;
-      color: var(--color-text-primary);
     }
 
-    .subheading {
-      font-size: 0.875rem;
-      color: var(--color-text-secondary);
-      margin: 0.25rem 0 0;
-    }
-
+    /* Success */
     .success {
       display: flex;
       align-items: flex-start;
       gap: 0.75rem;
       padding: 1rem;
-      border: 1px solid var(--color-success);
-      border-radius: 0.375rem;
-      background-color: color-mix(in srgb, var(--color-success) 10%, transparent);
-      color: var(--color-success);
-      margin-bottom: 1.5rem;
+      border: 2px solid #111111;
+      background-color: #f5f5f5;
+      color: #111111;
+      margin-bottom: 2rem;
     }
 
     .success-title {
-      font-weight: 600;
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 1rem;
       margin: 0;
     }
 
     .success-desc {
-      font-size: 0.875rem;
+      font-family: 'Lora', Georgia, serif;
+      font-size: 0.8125rem;
+      font-style: italic;
       margin: 0.25rem 0 0;
-      color: var(--color-text-secondary);
+      color: #525252;
     }
 
+    /* Form */
     .form {
       display: flex;
       flex-direction: column;
-      gap: 1.25rem;
+      gap: 1.5rem;
     }
 
     .field {
@@ -160,63 +202,98 @@ import { signal, inject } from '@angular/core';
     }
 
     .label {
-      font-size: 0.875rem;
-      font-weight: 500;
-      color: var(--color-text-primary);
+      font-family: 'Inter', 'Helvetica Neue', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: #111111;
     }
 
     .required {
-      color: #f85149;
+      color: #cc0000;
     }
 
     .input {
-      padding: 0.5rem 0.75rem;
-      border: 1px solid var(--color-input-border);
-      border-radius: 0.375rem;
-      background-color: var(--color-input-bg);
-      color: var(--color-text-primary);
+      padding: 0.5rem 0.25rem;
+      border: none;
+      border-bottom: 2px solid #111111;
+      background: transparent;
+      color: #111111;
+      font-family: 'JetBrains Mono', 'Courier New', monospace;
       font-size: 0.875rem;
-      font-family: inherit;
-      transition: border-color 0.15s ease;
+      border-radius: 0;
+      transition: background-color 0.2s ease-out;
+    }
+
+    .input::placeholder {
+      color: #a3a3a3;
+      font-family: 'Lora', Georgia, serif;
+      font-style: italic;
+      font-size: 0.8125rem;
     }
 
     .input:focus {
       outline: none;
-      border-color: var(--color-accent);
-      box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-accent) 25%, transparent);
+      background-color: #f0f0f0;
     }
 
     .textarea {
       resize: vertical;
-      min-height: 120px;
+      min-height: 140px;
     }
 
     .error {
-      font-size: 0.75rem;
-      color: #f85149;
+      font-family: 'JetBrains Mono', 'Courier New', monospace;
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #cc0000;
       margin: 0;
     }
 
     .submit-btn {
       align-self: flex-start;
-      padding: 0.5rem 1.25rem;
-      border: none;
-      border-radius: 0.375rem;
-      background-color: var(--color-accent);
-      color: #ffffff;
-      font-size: 0.875rem;
-      font-weight: 600;
+      padding: 0.75rem 2rem;
+      border: 2px solid #111111;
+      background-color: #111111;
+      color: #f9f9f7;
+      font-family: 'Inter', 'Helvetica Neue', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
       cursor: pointer;
-      transition: background-color 0.15s ease;
+      min-height: 44px;
+      transition:
+        background-color 0.2s ease-out,
+        color 0.2s ease-out;
     }
 
     .submit-btn:hover:not(:disabled) {
-      background-color: var(--color-accent-hover);
+      background-color: #f9f9f7;
+      color: #111111;
     }
 
     .submit-btn:disabled {
-      opacity: 0.6;
+      opacity: 0.4;
       cursor: not-allowed;
+    }
+
+    .submit-btn:focus-visible {
+      outline: 2px solid #111111;
+      outline-offset: 2px;
+    }
+
+    @media (max-width: 768px) {
+      .contact {
+        padding: 1.5rem 1.25rem 2rem;
+      }
+
+      .submit-btn {
+        width: 100%;
+        justify-content: center;
+      }
     }
   `,
 })
@@ -232,7 +309,7 @@ export class ContactComponent {
     message: ['', Validators.required],
   });
 
-  onSubmit(): void {
+  protected onSubmit(): void {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
       return;
