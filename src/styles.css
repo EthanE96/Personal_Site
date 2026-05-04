@@ -2,44 +2,16 @@
 @import 'tailwindcss';
 
 /* ─── Newsprint Design Tokens ─────────────────────────────── */
-:root {
+@theme {
+  --font-sans: Inter, 'Helvetica Neue', sans-serif;
+  --font-serif: 'Playfair Display', 'Times New Roman', serif;
+  --font-body: Lora, Georgia, serif;
+  --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+
   --color-bg: #f9f9f7;
   --color-ink: #111111;
-  --color-muted: #e5e5e0;
   --color-accent: #cc0000;
-  --color-border: #111111;
-  --color-neutral-100: #f5f5f5;
-  --color-neutral-200: #e5e5e5;
-  --color-neutral-400: #a3a3a3;
-  --color-neutral-500: #737373;
-  --color-neutral-600: #525252;
-  --color-neutral-700: #404040;
-
-  /* Legacy aliases for components not yet migrated */
-  --color-bg-primary: var(--color-bg);
-  --color-bg-secondary: #f5f5f5;
-  --color-bg-card: var(--color-bg);
-  --color-bg-card-hover: var(--color-neutral-100);
-  --color-text-primary: var(--color-ink);
-  --color-text-secondary: var(--color-neutral-500);
-  --color-text-link: var(--color-ink);
-  --color-success: #1a7f37;
-  --color-input-bg: transparent;
-  --color-input-border: var(--color-ink);
-}
-
-/* ─── Font Definitions ────────────────────────────────────── */
-.font-serif {
-  font-family: 'Playfair Display', 'Times New Roman', serif;
-}
-.font-body {
-  font-family: 'Lora', Georgia, serif;
-}
-.font-sans {
-  font-family: 'Inter', 'Helvetica Neue', sans-serif;
-}
-.font-mono {
-  font-family: 'JetBrains Mono', 'Courier New', monospace;
+  --color-muted: #e5e5e0;
 }
 
 /* ─── Utility Classes ─────────────────────────────────────── */
@@ -79,10 +51,10 @@ html {
 }
 
 body {
-  font-family: 'Lora', Georgia, serif;
-  background-color: var(--color-bg);
+  font-family: Lora, Georgia, serif;
+  background-color: #f9f9f7;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%23111111' fill-opacity='0.04' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E");
-  color: var(--color-ink);
+  color: #111111;
   margin: 0;
 }
 
@@ -96,6 +68,6 @@ a:hover {
 }
 
 *:focus-visible {
-  outline: 2px solid var(--color-ink);
+  outline: 2px solid #111111;
   outline-offset: 2px;
 }

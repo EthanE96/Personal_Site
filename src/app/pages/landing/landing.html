@@ -1,0 +1,73 @@
+<div class="w-full box-border px-10 pt-8 pb-12 newsprint-texture">
+  <!-- Editorial header -->
+  <header class="mb-10 pb-6 border-b-4 border-ink">
+    <p class="font-mono text-[0.65rem] uppercase tracking-[0.2em] text-accent mb-2 m-0">
+      — Selected Work
+    </p>
+    <h2
+      class="font-serif text-[clamp(2.5rem,6vw,4.5rem)] font-black leading-[0.9] tracking-[-0.03em] text-ink mb-4 mt-0"
+    >
+      Projects
+    </h2>
+    <div class="w-12 h-0.75 bg-ink mb-3" role="separator"></div>
+    <p class="font-body text-[0.9375rem] italic text-neutral-600 max-w-120 m-0">
+      A collection of applications and tools I've designed and built.
+    </p>
+  </header>
+
+  <!-- Project grid -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 auto-rows-[1fr]">
+    @for (project of paginatedProjects(); track project.title) {
+      <app-project-card [project]="project" />
+    }
+  </div>
+
+  <!-- Pagination -->
+  @if (totalPages() > 1) {
+    <nav class="flex items-center mt-10 border border-ink w-fit" aria-label="Project pages">
+      <button
+        class="px-4 py-2.5 border-0 border-r border-ink bg-transparent text-ink font-mono text-[0.65rem] uppercase tracking-widest cursor-pointer min-h-11 min-w-11 transition-colors duration-200 hover:enabled:bg-ink hover:enabled:text-bg disabled:text-neutral-400 disabled:cursor-not-allowed"
+        (click)="goToPage(currentPage() - 1)"
+        [disabled]="currentPage() === 1"
+        aria-label="Previous page"
+      >
+        ← Prev
+      </button>
+
+      @for (page of pageNumbers(); track page) {
+        @if (page === currentPage()) {
+          <button
+            class="px-4 py-2.5 border-0 border-r border-ink bg-ink text-bg font-mono text-[0.65rem] uppercase tracking-widest cursor-pointer min-h-11 min-w-11 transition-colors duration-200"
+            (click)="goToPage(page)"
+            aria-current="page"
+          >
+            {{ page }}
+          </button>
+        } @else {
+          <button
+            class="px-4 py-2.5 border-0 border-r border-ink bg-transparent text-ink font-mono text-[0.65rem] uppercase tracking-widest cursor-pointer min-h-11 min-w-11 transition-colors duration-200 hover:bg-ink hover:text-bg"
+            (click)="goToPage(page)"
+          >
+            {{ page }}
+          </button>
+        }
+      }
+
+      <button
+        class="px-4 py-2.5 border-0 bg-transparent text-ink font-mono text-[0.65rem] uppercase tracking-widest cursor-pointer min-h-11 min-w-11 transition-colors duration-200 hover:enabled:bg-ink hover:enabled:text-bg disabled:text-neutral-400 disabled:cursor-not-allowed"
+        (click)="goToPage(currentPage() + 1)"
+        [disabled]="currentPage() === totalPages()"
+        aria-label="Next page"
+      >
+        Next →
+      </button>
+
+      <span
+        class="font-mono text-[0.6rem] uppercase tracking-widest text-neutral-500 px-3.5 border-l border-ink leading-11 whitespace-nowrap"
+        aria-live="polite"
+      >
+        {{ currentPage() }} / {{ totalPages() }}
+      </span>
+    </nav>
+  }
+</div>

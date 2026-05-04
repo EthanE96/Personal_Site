@@ -102,7 +102,7 @@ Authoritative, intellectual, urgent, timeless. It feels like holding a fresh mor
 ### Radius & Border
 
 **Border Radius:** `0px` everywhere. No exceptions.
-Use inline styles or a `.sharp-corners` utility class to enforce zero radius on all components.
+Prefer Tailwind's `rounded-none` directly in templates. Only fall back to a global utility such as `.sharp-corners` in `src/styles.css` when working around third-party markup or repeated non-Tailwind edge cases.
 
 **Border Width:**
 
@@ -123,12 +123,13 @@ Always solid. Never dashed or dotted except for rare decorative elements (e.g., 
   Applied on hover to blog cards or interactive elements. Creates a "lifted" newspaper cutout effect.
 
 - **Implementation:**
-  ```css
-  .hard-shadow-hover:hover {
-    box-shadow: 4px 4px 0px 0px #111111;
-    transform: translate(-2px, -2px);
-  }
+
+  ```html
+  class="transition-all duration-200 hover:-translate-x-[2px] hover:-translate-y-[2px]
+  hover:shadow-[4px_4px_0px_0px_#111111]"
   ```
+
+  Prefer inline Tailwind utilities in the template for one-off or local interactions. If this exact treatment is reused broadly, define a global utility in `src/styles.css` rather than a component stylesheet.
 
 **No Effects:**
 
@@ -169,7 +170,7 @@ Subtle 4×4px dot pattern applied to the body background.
 }
 ```
 
-Apply `.newsprint-texture` to major sections for a fine graph-paper effect.
+Apply `.newsprint-texture` to major sections for a fine graph-paper effect. Because this effect relies on a pseudo-element, define it in `src/styles.css`; do not place it in component CSS files.
 
 **3. Radial Dot Pattern (Image Placeholders):**
 
@@ -517,6 +518,14 @@ focus-visible:ring-offset-2';
 
 ## 10. Implementation Constraints
 
+### Styling Architecture (Required)
+
+- **Tailwind-first:** Prefer inline Tailwind utility classes directly in Angular templates for layout, spacing, typography, color, borders, states, and responsive behavior.
+- **No component CSS by default:** Do not create or rely on component-specific `.css` files for routine styling.
+- **Global styles live in `src/styles.css`:** Put shared utilities, font imports, keyframes, pseudo-element patterns, global resets, and cross-cutting design tokens there.
+- **Only use CSS when necessary:** If Tailwind utilities cannot reasonably express the design requirement—such as `::before`/`::after`, complex keyframes, advanced selectors, or third-party overrides—use `src/styles.css` or truly necessary template-level styles. Avoid component stylesheet files unless there is no practical alternative.
+- **Promote repeated patterns thoughtfully:** If the same arbitrary-value Tailwind pattern appears repeatedly, promote it to a named global utility in `src/styles.css` instead of duplicating custom CSS across components.
+
 ### Font Import
 
 Use `@import` in the global stylesheet (`src/styles.css`) or include fonts in the app shell/head:
@@ -544,7 +553,7 @@ Define font classes:
 
 ### Tailwind Utilities
 
-Create custom utilities in `src/styles.css` using Tailwind layers:
+Create custom utilities in `src/styles.css` using Tailwind layers only for reusable or non-template-friendly patterns. Prefer inline Tailwind classes in templates whenever possible.
 
 - `.sharp-corners { border-radius: 0px !important; }`
 - `.newsprint-texture { ... }` (see Textures section)
@@ -558,14 +567,6 @@ To avoid double borders in grids:
 2. Use `border-r` and `border-b` on children
 3. Remove `border-r` on last column
 4. Remove `border-b` on last row (if needed)
-
-### Component Structure (Angular 20+)
-
-- Use standalone components (default in Angular v20+)
-- Use `input()` / `output()` APIs for component contracts
-- Use signals and `computed()` for local state and derived values
-- Keep styling in Tailwind classes directly in Angular templates (`class="..."`)
-- Prefer Angular native template control flow (`@if`, `@for`, `@switch`)
 
 ### Performance
 

@@ -4,6 +4,5 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   selector: 'app-resume',
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './resume.html',
-  styleUrl: './resume.css',
 })
 export class ResumeComponent {}
