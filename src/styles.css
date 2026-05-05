@@ -58,13 +58,15 @@ body {
   margin: 0;
 }
 
-a {
-  color: var(--color-ink);
-  text-decoration: none;
-}
+@layer base {
+  a {
+    color: var(--color-ink);
+    text-decoration: none;
+  }
 
-a:hover {
-  text-decoration: none;
+  a:hover {
+    text-decoration: none;
+  }
 }
 
 *:focus-visible {
