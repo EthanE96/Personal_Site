@@ -144,9 +144,32 @@
     <button
       type="submit"
       class="self-start px-8 py-3 border-2 border-ink bg-ink text-bg font-sans text-[0.7rem] font-bold uppercase tracking-[0.15em] cursor-pointer min-h-[44px] transition-colors duration-200 hover:bg-bg hover:text-ink disabled:opacity-40 disabled:cursor-not-allowed focus-visible:outline-2 focus-visible:outline-ink focus-visible:outline-offset-2"
-      [disabled]="submitted()"
+      [disabled]="submitted() || sending() || errorState() === 'cooldown' || errorState() === 'max_reached'"
     >
-      Transmit Message
+      {{ sending() ? 'Sending...' : 'Transmit Message' }}
     </button>
+
+    @if (errorState() === 'cooldown') {
+      <p
+        class="font-mono text-[0.65rem] uppercase tracking-[0.08em] text-accent m-0"
+        role="alert"
+      >
+        Please wait {{ cooldownSeconds() }}s before sending another message.
+      </p>
+    } @else if (errorState() === 'max_reached') {
+      <p
+        class="font-mono text-[0.65rem] uppercase tracking-[0.08em] text-accent m-0"
+        role="alert"
+      >
+        You've reached the daily message limit. Please try again tomorrow.
+      </p>
+    } @else if (errorState() === 'server') {
+      <p
+        class="font-mono text-[0.65rem] uppercase tracking-[0.08em] text-accent m-0"
+        role="alert"
+      >
+        Something went wrong. Please try again.
+      </p>
+    }
   </form>
 </div>
