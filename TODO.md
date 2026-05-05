@@ -1,5 +1,3 @@
-
-3. Project Links
-4. Resume Page
-5. Contact Links
-6. Mobile Responsiveness
+1. Resume Page / Bullets
+2. Contact Emails Server
+3. Mobile Responsiveness
