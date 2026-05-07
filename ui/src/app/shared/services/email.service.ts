@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
+import { catchError, Observable, throwError } from 'rxjs';
 import { environment } from '../../../environments/environment';
 
 export interface ContactPayload {
@@ -44,7 +44,15 @@ export class EmailService {
     }
 
     this.recordSubmission();
-    return this.http.post<void>(environment.apiUrl, payload);
+    return this.http.post<void>(environment.apiUrl, payload).pipe(
+      catchError((err: HttpErrorResponse) => {
+        if (err.status === 429) {
+          const reason: RateLimitError = err.error?.error === 'max_reached' ? 'max_reached' : 'cooldown';
+          return throwError(() => reason);
+        }
+        return throwError(() => err);
+      }),
+    );
   }
 
   cooldownRemainingSeconds(): number {
