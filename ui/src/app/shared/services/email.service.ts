@@ -44,7 +44,7 @@ export class EmailService {
     }
 
     this.recordSubmission();
-    return this.http.post<void>(environment.logicAppUrl, payload);
+    return this.http.post<void>(environment.apiUrl, payload);
   }
 
   cooldownRemainingSeconds(): number {

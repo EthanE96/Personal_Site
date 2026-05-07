@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  logicAppUrl: 'LOGIC_APP_URL_HERE',
+  apiUrl: 'http://localhost:7071/api/emailTrigger',
 };
