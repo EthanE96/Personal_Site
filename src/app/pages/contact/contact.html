@@ -15,34 +15,17 @@
     </p>
   </header>
 
-  @if (submitted()) {
-    <div
-      class="flex items-start gap-3 p-4 border-2 border-ink bg-neutral-100 text-ink mb-8"
-      role="status"
-      aria-live="polite"
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="20"
-        height="20"
-        viewBox="0 0 16 16"
-        fill="currentColor"
-        aria-hidden="true"
-      >
-        <path
-          d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"
-        />
-      </svg>
-      <div>
-        <p class="font-serif font-bold text-base text-ink m-0">Message transmitted.</p>
-        <p class="font-body text-[0.8125rem] italic text-neutral-600 mt-1 mb-0">
-          Thanks for reaching out. I'll get back to you soon.
-        </p>
-      </div>
-    </div>
-  }
-
-  <form [formGroup]="form" class="flex flex-col gap-6" novalidate>
+  <form
+    #nativeForm
+    [formGroup]="form"
+    (ngSubmit)="onSubmit()"
+    action="https://formsubmit.co/EthanAEdwards5@outlook.com"
+    method="POST"
+    class="flex flex-col gap-6"
+    novalidate
+  >
+    <input type="hidden" name="_captcha" value="false" />
+    <input type="hidden" name="_template" value="table" />
     <div class="flex flex-col gap-1.5">
       <label
         for="name"
@@ -51,6 +34,7 @@
       >
       <input
         id="name"
+        name="name"
         formControlName="name"
         type="text"
         class="px-1 py-2 border-0 border-b-2 border-ink bg-transparent text-ink font-mono text-[0.875rem] transition-colors duration-200 placeholder:text-neutral-400 placeholder:font-body placeholder:italic placeholder:text-[0.8125rem] focus:outline-none focus:bg-neutral-100"
@@ -75,6 +59,7 @@
       >
       <input
         id="email"
+        name="email"
         formControlName="email"
         type="email"
         class="px-1 py-2 border-0 border-b-2 border-ink bg-transparent text-ink font-mono text-[0.875rem] transition-colors duration-200 placeholder:text-neutral-400 placeholder:font-body placeholder:italic placeholder:text-[0.8125rem] focus:outline-none focus:bg-neutral-100"
@@ -103,6 +88,7 @@
       >
       <input
         id="subject"
+        name="subject"
         formControlName="subject"
         type="text"
         class="px-1 py-2 border-0 border-b-2 border-ink bg-transparent text-ink font-mono text-[0.875rem] transition-colors duration-200 placeholder:text-neutral-400 placeholder:font-body placeholder:italic placeholder:text-[0.8125rem] focus:outline-none focus:bg-neutral-100"
@@ -126,6 +112,7 @@
       >
       <textarea
         id="message"
+        name="message"
         formControlName="message"
         class="px-1 py-2 border-0 border-b-2 border-ink bg-transparent text-ink font-mono text-[0.875rem] resize-y min-h-35 transition-colors duration-200 placeholder:text-neutral-400 placeholder:font-body placeholder:italic placeholder:text-[0.8125rem] focus:outline-none focus:bg-neutral-100"
         rows="6"
@@ -144,25 +131,9 @@
     <button
       type="submit"
       class="self-start px-8 py-3 border-2 border-ink bg-ink text-bg font-sans text-[0.7rem] font-bold uppercase tracking-[0.15em] cursor-pointer min-h-[44px] transition-colors duration-200 hover:bg-bg hover:text-ink disabled:opacity-40 disabled:cursor-not-allowed focus-visible:outline-2 focus-visible:outline-ink focus-visible:outline-offset-2"
-      [disabled]="
-        submitted() || sending() || errorState() === 'cooldown' || errorState() === 'max_reached'
-      "
+      [disabled]="sending()"
     >
       {{ sending() ? 'Sending...' : 'Transmit Message' }}
     </button>
-
-    @if (errorState() === 'cooldown') {
-      <p class="font-mono text-[0.65rem] uppercase tracking-[0.08em] text-accent m-0" role="alert">
-        Please wait {{ cooldownSeconds() }}s before sending another message.
-      </p>
-    } @else if (errorState() === 'max_reached') {
-      <p class="font-mono text-[0.65rem] uppercase tracking-[0.08em] text-accent m-0" role="alert">
-        You've reached the daily message limit. Please try again tomorrow.
-      </p>
-    } @else if (errorState() === 'server') {
-      <p class="font-mono text-[0.65rem] uppercase tracking-[0.08em] text-accent m-0" role="alert">
-        Something went wrong. Please try again.
-      </p>
-    }
   </form>
 </div>

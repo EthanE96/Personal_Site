@@ -1,7 +1,5 @@
-import { ChangeDetectionStrategy, Component, signal, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal, inject, ViewChild, ElementRef } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
-
-type ErrorState = 'cooldown' | 'max_reached' | 'server' | null;
 
 @Component({
   selector: 'app-contact',
@@ -12,10 +10,9 @@ type ErrorState = 'cooldown' | 'max_reached' | 'server' | null;
 export class ContactComponent {
   private readonly fb = inject(FormBuilder);
 
-  protected readonly submitted = signal(false);
+  @ViewChild('nativeForm') private readonly nativeForm!: ElementRef<HTMLFormElement>;
+
   protected readonly sending = signal(false);
-  protected readonly errorState = signal<ErrorState>(null);
-  protected readonly cooldownSeconds = signal(0);
 
   protected readonly form = this.fb.group({
     name: ['', Validators.required],
@@ -23,4 +20,13 @@ export class ContactComponent {
     subject: ['', Validators.required],
     message: ['', Validators.required],
   });
+
+  protected onSubmit(): void {
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      return;
+    }
+    this.sending.set(true);
+    this.nativeForm.nativeElement.submit();
+  }
 }
