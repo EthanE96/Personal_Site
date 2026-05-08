@@ -2,7 +2,10 @@
 
   <!-- Mobile top bar (hidden at md+) -->
   <div class="flex md:hidden items-center justify-between px-4 border-b border-ink h-14">
-    <span class="font-serif text-lg font-black tracking-tight text-ink leading-none">Ethan Edwards</span>
+    <a
+        routerLink="/"
+        class="font-serif text-lg font-black tracking-tight text-ink leading-none no-underline transition-colors duration-200 hover:text-accent"
+      >Ethan Edwards</a>
     <nav class="flex items-stretch h-full" aria-label="Main navigation">
       <a
         routerLink="/"
@@ -47,9 +50,11 @@
         />
       </div>
 
-      <h1 class="font-serif text-[3rem] font-black leading-none tracking-[-0.02em] text-ink mb-2.5">
-        Ethan<br />Edwards
-      </h1>
+      <a routerLink="/" aria-label="Go to projects" class="no-underline block">
+        <h1 class="font-serif text-[3rem] font-black leading-none tracking-[-0.02em] text-ink mb-2.5 transition-colors duration-200 hover:text-accent">
+          Ethan<br />Edwards
+        </h1>
+      </a>
       <p class="font-body text-[1rem] italic text-neutral-600 leading-snug m-0">
         AI Solutions Architect
       </p>
