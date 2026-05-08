@@ -31,9 +31,6 @@
           },
           "configurations": {
             "production": {
-              "fileReplacements": [
-                {}
-              ],
               "budgets": [
                 {
                   "type": "initial",
