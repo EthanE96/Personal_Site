@@ -16,5 +16,9 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/contact/contact').then((m) => m.ContactComponent),
     title: 'Ethan Edwards — Contact',
   },
-  { path: '**', redirectTo: '' },
+  {
+    path: '**',
+    loadComponent: () => import('./pages/not-found/not-found').then((m) => m.NotFoundComponent),
+    title: 'Ethan Edwards — Page Not Found',
+  },
 ];
