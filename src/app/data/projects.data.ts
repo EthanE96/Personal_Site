@@ -61,7 +61,7 @@ export const PROJECTS: Project[] = [
     status: 'Completed',
     description:
       'Strengthens professional credibility by presenting experience, projects, and contact pathways in a polished format designed to support hiring and networking conversations.',
-    appUrl: 'https://ethanedwards.dev',
+    appUrl: 'https://eddyappz.com',
     githubUrl: 'https://github.com/EthanE96/Personal_Site',
     tags: ['Azure', 'Angular', 'Node.js', 'TypeScript', 'Tailwind CSS', 'Marketing'],
   },
