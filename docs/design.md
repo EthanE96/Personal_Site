@@ -1,15 +1,12 @@
-Always aim to:
+# Design System: Newsprint
+
+## Guiding Principles
 
 - Preserve or improve accessibility.
 - Maintain visual consistency with the provided design system.
 - Leave the codebase in a cleaner, more coherent state than you found it.
 - Ensure layouts are responsive and usable across devices.
 - Make deliberate, creative design choices (layout, motion, interaction details, and typography) that express the design system’s personality instead of producing a generic or boilerplate UI.
-
-</role>
-
-<design-system>
-# Design Style: Newsprint
 
 ## 1. Design Philosophy
 
@@ -573,4 +570,3 @@ To avoid double borders in grids:
 - Lazy load images below the fold
 - Use `transform` and `opacity` for animations (GPU accelerated)
 - Avoid animating `box-shadow` directly (use `will-change` if needed)
-  </design-system>
